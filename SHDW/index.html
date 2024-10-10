@@ -1,0 +1,480 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+<head>
+    <!-- Metadati -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌑 Shadow Company - L'élite dei mercenari 🛡️</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Fogli di stile -->
+    <style>
+        /* Stili generali */
+        body {
+            margin: 0;
+            font-family: 'Roboto Slab', serif; /* Font per il corpo del testo */
+            background-color: #121212;
+            color: #f0f0f0;
+        }
+
+        header {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            background: url('https://example.com/images/header-background.jpg') no-repeat center center/cover;
+        }
+
+        /* Stile per l'iframe del video di YouTube */
+        #bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            pointer-events: none;
+        }
+
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(18, 18, 18, 0.7);
+            z-index: 1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        header h1 {
+            font-family: 'Oswald', sans-serif; /* Font per i titoli */
+            font-size: 5em;
+            color: #ffffff;
+            text-shadow: 2px 2px 10px #000;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        header p {
+            font-size: 1.5em;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #e50914;
+            color: #ffffff;
+            text-decoration: none;
+            margin-top: 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .btn:hover {
+            background-color: #b20710;
+        }
+
+        /* Navigazione */
+        nav {
+            background-color: #181818;
+            padding: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+        }
+
+        nav li {
+            margin: 0 15px;
+        }
+
+        nav a {
+            font-family: 'Oswald', sans-serif; /* Font per la navigazione */
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #e50914;
+        }
+
+        /* Sezioni */
+        main {
+            padding: 50px 10%;
+        }
+
+        .parallax {
+            background: url('https://example.com/images/operations_background.jpg') fixed no-repeat center center/cover;
+            padding: 100px 0;
+        }
+
+        .parallax h2 {
+            font-family: 'Oswald', sans-serif; /* Font per i titoli nelle sezioni */
+            text-align: center;
+            font-size: 3em;
+            color: #ffffff;
+            margin-bottom: 50px;
+        }
+
+        /* Carousel */
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+        }
+
+        .carousel-item {
+            flex: none;
+            width: 300px;
+            margin-right: 20px;
+            scroll-snap-align: start;
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .carousel-item h3 {
+            font-family: 'Oswald', sans-serif; /* Font per i nomi degli operatori */
+            margin-top: 15px;
+            color: #e50914;
+        }
+
+        .carousel-item p {
+            height: 0;
+            overflow: hidden;
+            transition: height 0.4s ease;
+            margin-top: 10px;
+            color: #fff;
+            background-color: #333;
+            padding: 0 10px;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        /* Grid Features */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .feature {
+            background-color: #1e1e1e;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .feature i {
+            font-size: 3em;
+            color: #e50914;
+            margin-bottom: 10px;
+        }
+
+        .feature h3 {
+            font-family: 'Oswald', sans-serif; /* Font per i titoli nelle caratteristiche */
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            font-size: 1em;
+        }
+
+        /* Sezione Contatto */
+        #contact {
+            background-color: #181818;
+            padding: 50px;
+            text-align: center;
+        }
+
+        #contact a {
+            font-family: 'Oswald', sans-serif; /* Font per i contatti */
+            color: #e50914;
+            text-decoration: none;
+        }
+
+        #contact ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #contact li {
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+
+        #contact img {
+            margin-top: 20px;
+            width: 200px;
+            height: 200px;
+        }
+
+        /* Interactive Map */
+        #map {
+            width: 100%;
+            height: 500px;
+            background-color: #333;
+            margin-top: 50px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #181818;
+            color: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Animazioni personalizzate */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+
+    <!-- Aggiunta di Leaflet.js per la mappa interattiva -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+</head>
+<body>
+
+<header>
+    <!-- Incorporamento del video di YouTube -->
+    <iframe id="bg-video" src="https://www.youtube.com/embed/cWE7JHPL6MI?autoplay=1&mute=1&controls=0&loop=1&playlist=cWE7JHPL6MI&modestbranding=1&showinfo=0&iv_load_policy=3" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+    <!-- Overlay per migliorare la leggibilità del testo -->
+    <div class="header-overlay"></div>
+
+    <div class="header-content">
+        <h1>🌑 Shadow Company</h1>
+        <p>La più letale unità di mercenari in Call of Duty 🛡️</p>
+        <a href="#operators" class="btn">Scopri di più ➡️</a>
+    </div>
+</header>
+
+<!-- Navigazione -->
+<nav>
+    <ul>
+        <li><a href="#home">🏠 Home</a></li>
+        <li><a href="#operators">👥 Operatori</a></li>
+        <li><a href="#missions">🎯 Missioni</a></li>
+        <li><a href="#about">ℹ️ Chi Siamo</a></li>
+        <li><a href="#contact">📞 Contattaci</a></li>
+    </ul>
+</nav>
+
+<!-- Contenuto principale -->
+<main>
+    <!-- Sezione Operatori -->
+    <section id="operators" class="parallax">
+        <h2>Operatori Principali 👥</h2>
+        <div class="carousel" id="operator-carousel">
+            <!-- Gli operatori verranno caricati dinamicamente qui -->
+        </div>
+    </section>
+
+    <!-- Video Extra -->
+    <section id="extra-video">
+        <h2>Guarda il video sui mercenari</h2>
+        <div style="text-align:center;">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/78nPBVjUPv8?autoplay=1&mute=0&controls=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <!-- Caratteristiche Uniche -->
+    <section id="features">
+        <h2>Caratteristiche Uniche ✨</h2>
+        <div class="feature-grid">
+            <div class="feature">
+                <i class="icon-drone">🚁</i>
+                <h3>Guerra Tecnologica</h3>
+                <p>Utilizzo di droni e attrezzature avanzate per dominare il campo di battaglia.</p>
+            </div>
+            <div class="feature">
+                <i class="icon-stealth">🥷</i>
+                <h3>Infiltrazione</h3>
+                <p>Operazioni sotto copertura con la massima discrezione e precisione.</p>
+            </div>
+            <div class="feature">
+                <i class="icon-armor">🛡️</i>
+                <h3>Forza Bruta</h3>
+                <p>Mercenari equipaggiati con armamenti pesanti e corazze impenetrabili.</p>
+            </div>
+            <div class="feature">
+                <i class="icon-strategy">🎯</i>
+                <h3>Tattiche Avanzate</h3>
+                <p>Pianificazione strategica per ogni missione, garantendo il successo operativo.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mappa Interattiva -->
+    <section id="interactive-map">
+        <h2>Operazioni Globali 🌍</h2>
+        <div id="map"></div>
+    </section>
+
+    <!-- Sezione Chi Siamo -->
+    <section id="about">
+        <h2>Chi Siamo ℹ️</h2>
+        <p>La Shadow Company è una forza mercenaria d'élite operante in tutto il mondo. Composta da veterani altamente addestrati, la nostra missione è eseguire operazioni che richiedono precisione, discrezione e forza letale. Con una combinazione di tecnologia avanzata e tattiche militari, siamo in grado di affrontare qualsiasi sfida.</p>
+    </section>
+
+    <!-- Sezione Contatto -->
+    <section id="contact">
+        <h2>Contattaci 📞</h2>
+        <p>Per ulteriori informazioni sulle nostre operazioni o per unirti alla Shadow Company, puoi contattarci attraverso i seguenti metodi:</p>
+        <ul>
+            <li>📞 Telefono: <a href="tel:+1 862 783-2330">+1 862 783-2330</a></li>
+            <li>✉️ Email: <a href="mailto:giammarcoleopardi@gmail.com">giammarcoleopardi@gmail.com</a></li>
+        </ul>
+        <p>Oppure scansiona il QR code qui sotto per accedere al nostro canale di comunicazione sicuro:</p>
+        <img src="RUID97611954f63d4a4abaaa194c416afa99.jpg" alt="QR Code per la Shadow Company" style="width:200px;height:200px;">
+    </section>
+</main>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 Shadow Company Fan Page - Call of Duty</p>
+</footer>
+
+<!-- Script JavaScript -->
+<script>
+    // Inizializzazione della mappa interattiva con Leaflet
+    document.addEventListener('DOMContentLoaded', function() {
+        var map = L.map('map').setView([20, 0], 2);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Aggiunta marker per le operazioni globali
+        var missions = [
+            { lat: 34.0522, lng: -118.2437, content: 'Operazione Shadow 🌑' },
+            { lat: 51.5074, lng: -0.1278, content: 'Operazione Ghost 👻' },
+            { lat: 35.6895, lng: 139.6917, content: 'Operazione Ronin 🗡️' }
+        ];
+
+        missions.forEach(function(mission) {
+            var marker = L.marker([mission.lat, mission.lng]).addTo(map);
+            marker.bindPopup('<h3>' + mission.content + '</h3>');
+        });
+
+        // Caricamento dinamico degli operatori principali nel carosello con descrizione a tendina
+        var operators = [
+            {
+                name: 'Velikan',
+                image: 'download.jpg',
+                description: 'Il mercenario più temuto della Shadow Company, conosciuto per la sua forza sovrumana e la sua armatura impenetrabile.'
+            },
+            {
+                name: 'Barrage',
+                image: 'images (1).jpg',
+                description: 'Maestro della guerra tecnologica, Barrage utilizza droni e gadget avanzati per sconfiggere i nemici.'
+            },
+            {
+                name: 'Roze',
+                image: 'download1.jpg',
+                description: 'Cecchino d\'élite con una precisione micidiale, Roze è temuta su tutti i fronti.'
+            },
+            {
+                name: 'Philip Graves',
+                image: 'PhillipCOD.webp',
+                description: 'Leader della Shadow Company, Philip Graves è noto per la sua astuzia e spietatezza in battaglia.'
+            },
+            {
+                name: 'Lerch',
+                image: 'Lerch_Operator_Default_MW.webp',
+                description: 'Lerch è uno specialista di incursioni e combattimento corpo a corpo, un veterano senza paura.'
+            }
+        ];
+
+        var carousel = document.getElementById('operator-carousel');
+        operators.forEach(function(operator) {
+            var item = document.createElement('div');
+            item.classList.add('carousel-item');
+
+            var img = document.createElement('img');
+            img.src = operator.image;
+            img.alt = operator.name;
+
+            var h3 = document.createElement('h3');
+            h3.textContent = operator.name;
+
+            var p = document.createElement('p');
+            p.textContent = operator.description;
+
+            item.appendChild(img);
+            item.appendChild(h3);
+            item.appendChild(p);
+
+            item.addEventListener('click', function() {
+                // Calcola l'altezza del paragrafo per l'effetto tendina
+                if (p.style.height === '0px' || p.style.height === '') {
+                    p.style.height = p.scrollHeight + 'px';
+                } else {
+                    p.style.height = '0px';
+                }
+            });
+
+            carousel.appendChild(item);
+        });
+    });
+</script>
+
+</body>
+</html>
